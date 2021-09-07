@@ -12,5 +12,4 @@ import java.util.ArrayList;
  * @author VINH
  */
 public class Students {
-    ArrayList<Pet> studentsList = new ArrayList();
 }

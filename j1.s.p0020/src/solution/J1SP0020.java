@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package j1.s.p0020;
+package solution;
 
 import java.util.Scanner;
 

@@ -34,7 +34,7 @@ public class StudentManager {
                     
                     break;
                 case 4:
-                    
+                    Options.report();
                     break;
                 case 5:
               

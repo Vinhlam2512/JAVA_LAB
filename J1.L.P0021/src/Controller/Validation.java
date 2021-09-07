@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Models.Student;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,6 +14,8 @@ import java.util.Scanner;
  * @author VINH
  */
 public class Validation {
+
+    static ArrayList<Student> students = new ArrayList();
 
     static Scanner sc = new Scanner(System.in);
 
@@ -35,9 +39,49 @@ public class Validation {
     public static String getString(String inputMsg, String errorMsg) {
         String str;
         while (true) {
-            System.out.println(inputMsg);
+            System.out.print(inputMsg);
             str = sc.nextLine().trim();
-            if (str.length() == 0 || str.isEmpty() || isNumeric(str)) {
+            if (str.length() == 0 || str.isEmpty() || !isNumeric(str)) {
+                System.out.println(errorMsg);
+            } else {
+                return str;
+            }
+        }
+    }
+
+    public static int getId(String inputMsg, String errorMsg) {
+        int id;
+        while (true) {
+            try {
+                System.out.print(inputMsg);
+                id = sc.nextInt();
+                
+                return id;
+            } catch (Exception e) {
+//                System.out.println(errorMsg);
+            }
+        }
+    }
+
+    public static int checkId(int id) {
+        if (students.isEmpty()) {
+            return 1;
+        }
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId() == id) {
+                System.out.println("Id is already exist!");
+                return -1;
+            }
+        }
+        return 1;
+    }
+
+    public static String getName(String inputMsg, String errorMsg) {
+        String str;
+        while (true) {
+            System.out.print(inputMsg);
+            str = sc.nextLine().trim();
+            if (str.length() == 0 || str.isEmpty() || !isNumeric(str)) {
                 System.out.println(errorMsg);
             } else {
                 return str;
@@ -53,7 +97,7 @@ public class Validation {
         }
 
         for (char c : str.toCharArray()) {
-            if (!Character.isDigit(c)) {
+            if (Character.isDigit(c)) {
                 return false;
             }
         }
@@ -62,17 +106,26 @@ public class Validation {
 
     }
 
-    public static int getId(String inputMsg, String errorMsg) {
-        String id;
+    public static String getCourse(String inputMsg, String errorMsg, String coursesName[]) {
+        String str;
         while (true) {
-            System.out.println(inputMsg);
-            id = sc.nextLine();
-            if (isNumeric(id)) {
-                return Integer.parseInt(id);
-            } else {
+            System.out.print(inputMsg);
+            str = sc.nextLine().trim();
+            if (str.length() == 0 || str.isEmpty() || !checkCourse(coursesName, str)) {
                 System.out.println(errorMsg);
+            } else {
+                return str;
             }
         }
+    }
+
+    public static Boolean checkCourse(String coursesName[], String courseName) {
+        for (String course : coursesName) {
+            if (courseName.equalsIgnoreCase(course)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
