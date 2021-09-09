@@ -10,10 +10,10 @@ package Models;
  * @author VINH
  */
 public class Student {
-    int id;
-    String name;
-    int semester;
-    String courseName;
+    private int id;
+    private String name;
+    private int semester;
+    private String courseName;
 
     
     public Student(int id, String name, int semester, String courseName) {

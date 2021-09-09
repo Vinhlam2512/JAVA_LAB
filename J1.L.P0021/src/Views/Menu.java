@@ -6,8 +6,7 @@
 package Views;
 
 import java.util.ArrayList;
-import Controller.Validation;
-
+import Utils.Get;
 /**
  *
  * @author VINH
@@ -15,6 +14,7 @@ import Controller.Validation;
 public class Menu {
     String menuTitle;
     ArrayList<String> optionsList = new ArrayList<String>();
+    Get get = new Get();
 
     public Menu() {
     }
@@ -39,7 +39,7 @@ public class Menu {
         //lựa chọn lớn nhất là số thứ tự ứng với số mục chọn
         String inputMsg = "Choose [1.." + maxOption + "]: ";
         String errorMsg = "You are required to choose the option 1.." + maxOption; 
-        return Validation.getAnInteger(inputMsg, errorMsg, 1, maxOption);
+        return get.getAnInteger(inputMsg, errorMsg, 1, maxOption);
         //in ra câu nhập: Choose[1..8]: , giả sử có 8 mục chọn trong
         //menu
     }

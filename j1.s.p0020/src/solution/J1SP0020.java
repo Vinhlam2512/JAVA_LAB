@@ -10,22 +10,30 @@ import java.util.Scanner;
 public class J1SP0020 {
 
     public static void main(String[] args) {
-
+        int size;
+        int i;
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter number of array: ");
-        int size = Integer.parseInt(sc.nextLine());
+        do {
+            System.out.print("Enter size of array: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("That's not a number!");
+                System.out.print("Enter size of array: ");
+                sc.next();
+            }
+            size = sc.nextInt();
+        } while (size <= 0);
         int a[] = new int[size];
-        for (int i = 0; i < size; i++) {
+        for (i = 0; i < size; i++) {
             System.out.print("Input element a[" + i + "]: ");
-            a[i] = Integer.parseInt(sc.nextLine());
+            a[i] = sc.nextInt();
         }
         System.out.println("Unsorted array: ");
-        Controller.printArr(a, size);
+        Views.printArr(a, size);
 
         Controller.selectionSort(a, size);
 
         System.out.println("Sorted array: ");
-        Controller.printArr(a, size);
+        Views.printArr(a, size);
 
     }
 }

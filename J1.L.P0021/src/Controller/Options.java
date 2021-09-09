@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Utils.Get;
+import Utils.Validation;
 import Models.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,23 +17,26 @@ import java.util.Scanner;
  */
 public class Options {
 
-    static String coursesName[] = {"Java", ".Net", "C", "C++"};
-    static ArrayList<Student> students = new ArrayList();
-    static Scanner sc = new Scanner(System.in);
+    private String coursesName[] = {"Java", ".Net", "C", "C++"};
+    private ArrayList<Student> students = new ArrayList();
+    private Scanner sc = new Scanner(System.in);
+    Student student = new Student();
+    Get get = new Get();
+    Validation val = new Validation();
 
-    public static void create() {
+    public void create() {
         String choice;
-        int check;
+        boolean check;
         int stt = 1;
         int count = 0;
         int id, semester;
         String name, courseName;
         while (count < 2) {
-            name = Validation.getName("Input name of student " + stt + " : ", "The student name is required!");
-            courseName = Validation.getCourse("Input name of course: ", "The course name is required!", coursesName);
-                            id = Validation.getId("Input id: ", "The id is required!");
+            name = get.getName("Input name of student " + stt + " : ", "The student name is required!");
+            courseName = get.getCourse("Input name of course: ", "The course name is required!", coursesName);
+            id = get.getId("Input id is positive integer: ", "That's not a number!");
 
-            semester = Validation.getId("Input semester: ", "The semester is required!");
+            semester = get.getSemester("Input semester : ", "That's not a number!");
             students.add(new Student(id, name, semester, courseName));
             count++;
             if (count == 2) {
@@ -47,19 +52,19 @@ public class Options {
         }
     }
 
-    public static void find() {
+    public void find() {
 
     }
 
-    public static void sort() {
+    public void sort() {
 
     }
 
-    public static void update() {
+    public void update() {
 
     }
 
-    public static void delete() {
+    public void delete() {
 
     }
 

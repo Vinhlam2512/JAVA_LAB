@@ -13,6 +13,7 @@ import Controller.Options;
 public class StudentManager {
 
     public static void main(String[] args) {
+        Options ops = new Options();
         Menu menu = new Menu("STUDENT MANAGEMENT");
         menu.addOptions("   1.	Create");
         menu.addOptions("   2.	Find and Sort");
@@ -25,7 +26,7 @@ public class StudentManager {
             choice = menu.getChoice();
             switch (choice) {
                 case 1:
-                    Options.create();
+                    ops.create();
                     break;
                 case 2:
                     
