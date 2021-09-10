@@ -15,14 +15,6 @@ public class Views {
 
     public static void main(String[] args) {
         Controllers ctr = new Controllers();
-        Validation val = new Validation();
-        Scanner sc = new Scanner(System.in);
-        String s;
-        do {
-            System.out.print("Input string: ");
-            s = sc.nextLine().trim();
-        } while (!val.isEmpty(s)); // || !val.hasNumber(s)
-
-        System.out.println(ctr.printReverse(s));
+        ctr.printReverse("hello there");
     }
 }

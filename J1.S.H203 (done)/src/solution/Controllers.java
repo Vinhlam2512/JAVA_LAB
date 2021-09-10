@@ -5,13 +5,24 @@
  */
 package solution;
 
+import java.util.Scanner;
+
 /**
  *
  * @author VINH
  */
 public class Controllers {
+    Validation val = new Validation();
+    Scanner sc = new Scanner(System.in);
+    public void printReverse(String s){
+         while (!val.isEmpty(s)){// || !val.hasNumber(s)
+            System.out.print("Input string: ");
+            s = sc.nextLine().trim();
+         }
+        System.out.println(reverse(s));
+    }
 
-    public String printReverse(String s) {
+    public String reverse(String s) {
         int i;
         String[] splited = s.split("\\s++");
         String result = toUpperCase(splited[splited.length - 1]);

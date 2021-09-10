@@ -10,12 +10,15 @@ package Models;
  * @author VINH
  */
 public class Student {
+
     private int id;
     private String name;
     private int semester;
     private String courseName;
 
-    
+    public Student() {
+    }
+
     public Student(int id, String name, int semester, String courseName) {
         this.id = id;
         this.name = name;
@@ -54,5 +57,10 @@ public class Student {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Student " + "id: " + id + "\t | Name: " + name + "\t | Semester: " + semester + "\t | Course name:" + courseName ;
+    }
+
 }
