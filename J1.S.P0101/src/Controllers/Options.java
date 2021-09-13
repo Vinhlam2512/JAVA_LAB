@@ -2,15 +2,22 @@ package Controllers;
 
 import Models.Employee;
 import java.util.ArrayList;
+import Models.Employee;
 
 public class Options {
-    ArrayList<Employee> employees = new ArrayList<>();
+
     Get get = new Get();
-    
-    public void addEmployees() {
+    Ultils ultil = new Ultils();
+
+    public void addEmployees(ArrayList<Employee> employees) {
         int id;
         String firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency;
-        id = get.getId("Input id: ", "That is not number!");
+        do {
+            id = get.getId("Input id: ", "That is not number!");
+            if (!ultil.checkDuplicateId(employees, id)) {
+                System.out.println("This id is already exsit!");
+            }
+        } while (!ultil.checkDuplicateId(employees, id));
         firstName = get.getName("Input first name: ", "Please input first name!");
         lastName = get.getName("Input last name: ", "Please input last name!");
         phone = get.getPhone("Input phone: ", "That is not phone number!");
@@ -21,11 +28,27 @@ public class Options {
         salary = get.getSalary("Input salary: ", "Please input salary!");
         egency = get.getString("Input egency: ");
         employees.add(new Employee(id, firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency));
-        
+
     }
-    public void updateEmployees(){
-        for (int i = 0; i < 2; i++) {
-                        System.out.println(employees.get(i).toString());
-                    }
+
+    public void updateEmployees(ArrayList<Employee> employees) {
+        if (ultil.findById(employees) == null) {
+            System.out.println("Dont have this id!");
+            return;
+        } 
+        String phone;
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.println(employees.get(i));
+        }
+    }
+    public void removeEmployees(ArrayList<Employee> employees){
+        ArrayList<Employee> check = ultil.findById(employees);
+        if (check == null) {
+            System.out.println("Dont have this id!");
+            return;
+        }
+        if(employees.contains(check)){
+            employees.remove(check);
+        }
     }
 }

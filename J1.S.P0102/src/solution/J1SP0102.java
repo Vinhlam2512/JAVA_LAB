@@ -5,12 +5,11 @@
  */
 package solution;
 
-
-
 public class J1SP0102 {
 
     public static void main(String[] args) {
-        Controllers.getDate();
+        Controllers ctl = new Controllers();
+        ctl.getDate();
     }
 
 }

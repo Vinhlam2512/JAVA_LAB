@@ -20,10 +20,11 @@ public class main {
         Scanner sc = new Scanner(System.in);
         int size = views.input();
         int arr[] = new int[size];
+        views.inputArray(arr, size);
         System.out.print("Unsorted array: ");
         views.printArr(arr, size);
         control.bubbleSort(arr);
         System.out.print("Sorted array: ");
-        views.printArrSorted(arr, size);
+        views.printArr(arr, size);
     }
 }

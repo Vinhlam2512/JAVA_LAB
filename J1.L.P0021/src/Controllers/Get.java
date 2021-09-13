@@ -17,6 +17,7 @@ public class Get {
     Scanner sc = new Scanner(System.in);
     private String[] courses = {"Java", ".Net", "C", "C++"};
 
+    // validate and get id
     public int getId(String inputMsg, String errMsg) {
         int id;
         while (true) {
@@ -32,7 +33,8 @@ public class Get {
             }
         }
     }
-
+    
+    // validate and get name
     public String getName(String inputMsg, String errMsg) {
         String name;
         while (true) {
@@ -46,6 +48,7 @@ public class Get {
         }
     }
 
+        // validate and get semester
     public int getSemester(String inputMsg, String errMsg) {
         int semester;
         while (true) {
@@ -61,7 +64,8 @@ public class Get {
             }
         }
     }
-
+    
+    // validate and get course name
     public String getCourseName(String inputMsg, String errMsg) {
         String courseName;
         while (true) {

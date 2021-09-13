@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
+
+
 package solution;
 
 import java.util.Scanner;
@@ -34,8 +33,11 @@ public class Controllers {
 
     public String toUpperCase(String s) {
         String[] splited = s.split("");
-        String result = splited[0].toUpperCase();
-        for (int i = 1; i < splited.length; i++) {
+        String result = "";
+        for (int i = 0; i < splited.length; i++) {
+            if(i == 1){
+                splited[i] = splited[i].toUpperCase;
+            }
             result = result + splited[i];
         }
         return result;
