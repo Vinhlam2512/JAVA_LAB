@@ -14,7 +14,9 @@ import java.util.Scanner;
  * @author VINH
  */
 public class checkInput {
+
     Scanner sc = new Scanner(System.in);
+
     public int choiceInput() {
         int choice;
         do {
@@ -52,20 +54,32 @@ public class checkInput {
         return false;
     }
 
-    public int checkId(ArrayList<Student> student, int id) {
+    public int checkName(ArrayList<Student> students, int id, String name) {
         int i;
-        if (student.isEmpty()) {
-            return 0;
+        if (students.isEmpty()) {
+            return -1;
         }
-        for ( i = 0; i < student.size(); i++) {
-            if (student.get(i).getId() == id) {
-                return id;
+        for (Student student : students) {
+
+            if (student.getId() == id && student.getName().equalsIgnoreCase(name)) {
+                return 1;
             }
         }
-        return 0;
+        return -1;
     }
-    
-    
+
+    public boolean checkCourse(ArrayList<Student> students, int semester, String courseName) {
+        if (students.isEmpty()) {
+            return true;
+        }
+        for (Student student : students) {
+            if (student.getSemester() == semester && student.getCourseName().equalsIgnoreCase(courseName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public int getFindId(String inputMsg) {
         int fId;
         System.out.print(inputMsg);
@@ -76,7 +90,7 @@ public class checkInput {
             return -1;
         }
     }
-    
+
     public String isContinue() {
         System.out.println("Do you want to continue (Y/N)? Choose Y to continue, N to return main screen.");
         do {
@@ -93,7 +107,20 @@ public class checkInput {
             }
         } while (true);
     }
-    public String isExist(){
-        
+
+    public int index(String inputMsg, String errMsg, int size) {
+        int id;
+        while (true) {
+            try {
+                System.out.print(inputMsg);
+                id = Integer.parseInt(sc.nextLine());
+                if (id > 0 && id <= size) {
+                    return id;
+                }
+                System.out.println(errMsg);
+            } catch (Exception e) {
+                System.out.println(errMsg);
+            }
+        }
     }
 }

@@ -33,7 +33,7 @@ public class Get {
             }
         }
     }
-    
+
     // validate and get name
     public String getName(String inputMsg, String errMsg) {
         String name;
@@ -48,7 +48,7 @@ public class Get {
         }
     }
 
-        // validate and get semester
+    // validate and get semester
     public int getSemester(String inputMsg, String errMsg) {
         int semester;
         while (true) {
@@ -64,7 +64,7 @@ public class Get {
             }
         }
     }
-    
+
     // validate and get course name
     public String getCourseName(String inputMsg, String errMsg) {
         String courseName;

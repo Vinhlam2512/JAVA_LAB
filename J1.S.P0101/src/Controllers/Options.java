@@ -1,13 +1,17 @@
 package Controllers;
 
+import java.util.Scanner;
 import Models.Employee;
 import java.util.ArrayList;
 import Models.Employee;
+import java.util.Collections;
 
 public class Options {
 
     Get get = new Get();
+    checkInput check = new checkInput();
     Ultils ultil = new Ultils();
+    Scanner sc = new Scanner(System.in);
 
     public void addEmployees(ArrayList<Employee> employees) {
         int id;
@@ -28,27 +32,69 @@ public class Options {
         salary = get.getSalary("Input salary: ", "Please input salary!");
         egency = get.getString("Input egency: ");
         employees.add(new Employee(id, firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency));
-
     }
 
     public void updateEmployees(ArrayList<Employee> employees) {
-        if (ultil.findById(employees) == null) {
-            System.out.println("Dont have this id!");
+        ArrayList<Employee> listEmployeeFindById = ultil.findById(employees);
+        if (listEmployeeFindById.isEmpty()) {
+            System.out.println("---------------------- List is Empty! ----------------------");
             return;
-        } 
-        String phone;
-        for (int i = 0; i < employees.size(); i++) {
-            System.out.println(employees.get(i));
+        }
+        System.out.println(listEmployeeFindById);
+        System.out.println("---------------------- Input infor you want to update! ----------------------");
+        int id;
+        String firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency;
+        do {
+            id = get.getId("Input id: ", "That is not number!");
+            if (!ultil.checkDuplicateId(employees, id)) {
+                System.out.println("This id is already exsit!");
+            }
+        } while (!ultil.checkDuplicateId(employees, id));
+        firstName = get.getName("Input first name: ", "Please input first name!");
+        lastName = get.getName("Input last name: ", "Please input last name!");
+        phone = get.getPhone("Input phone: ", "That is not phone number!");
+        email = get.getEmail("Input emai: ", "That is not email!");
+        address = get.getString("Input address: ");
+        dateOfBirth = get.getDateOfBirth("Input date of birth: ", "Please enter date with format [dd/mm/yyyy]!");
+        sex = get.getSex("Input sex: ", "Please input male or female!");
+        salary = get.getSalary("Input salary: ", "Please input salary!");
+        egency = get.getString("Input egency: ");
+        employees.set(ultil.indexFlag, new Employee(id, firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency));
+        System.out.println("------------------------ Update Success! ------------------------");
+    }
+
+    public void removeEmployees(ArrayList<Employee> employees) {
+        ArrayList<Employee> listEmployeeFindById = ultil.findById(employees);
+        if (listEmployeeFindById.isEmpty()) {
+            System.out.println("---------------------- List is Empty! ----------------------");
+            return;
+        }
+        System.out.println(listEmployeeFindById);
+        employees.remove(listEmployeeFindById.get(0));
+        System.out.println("------------------------ Remove Success! ------------------------");
+    }
+
+    public void searchEmployees(ArrayList<Employee> employees) {
+        String firstName;
+        firstName = get.getName("Input Name you want find: ", "Please input first name!");
+        ArrayList<Employee> listEmployeeFindByName = ultil.findByName(employees, firstName);
+        for (Employee employee : listEmployeeFindByName) {
+            System.out.println(employee);
         }
     }
-    public void removeEmployees(ArrayList<Employee> employees){
-        ArrayList<Employee> check = ultil.findById(employees);
-        if (check == null) {
-            System.out.println("Dont have this id!");
-            return;
-        }
-        if(employees.contains(check)){
-            employees.remove(check);
+    
+    public void sortEmployees(ArrayList<Employee> employees){
+        Collections.sort(employees, (Employee e1, Employee e2) ->{
+            if(e1.getLastName().compareTo(e2.getLastName()) > 0){
+                return 1;
+            }else if(e1.getLastName().compareTo(e2.getLastName()) < 0){
+                return -1;
+            }else{
+                return e1.getId() - e2.getId();
+            }
+        });
+        for (Employee employee : employees) {
+            System.out.println(employee);
         }
     }
 }

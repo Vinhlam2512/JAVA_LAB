@@ -20,18 +20,18 @@ public class Controllers {
             for (int j = 0; j < n - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     // swap arr[j+1] and arr[j]
-                     temp = arr[j];
+                    temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
             }
         }
     }
-    public int random(int size){
+
+    public int random(int size) {
         Random rad = new Random();
         int random = rad.nextInt(size - 1) + 1;
         return random;
     }
 
-    
 }

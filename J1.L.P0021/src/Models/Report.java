@@ -49,7 +49,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Name: " + name + " | CourseName: " + courseName + " \t| TotalCourse: " + totalCourse;
+        return "Name: " + name + "\t\t | CourseName: " + courseName + " \t\t| TotalCourse: " + totalCourse;
     }
 
 }

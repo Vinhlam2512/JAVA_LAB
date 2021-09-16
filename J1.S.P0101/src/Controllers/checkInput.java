@@ -29,7 +29,7 @@ public class checkInput {
                 System.out.println("You need to input 1 - 6!");
             }
 
-        } while (choice <= 0 || choice > 6);
+        } while (choice <= 0 || choice > 7);
         return choice;
     }
 
@@ -60,7 +60,6 @@ public class checkInput {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
     }
-    
 
     public int validateYear(int year) {
         if (1960 > year || year > 2003) {
@@ -69,7 +68,8 @@ public class checkInput {
         }
         return 1;
     }
-     public boolean validateSalary(String s) {
+
+    public boolean validateSalary(String s) {
         int length = s.length();
         int count = 0;
         for (char c : s.toCharArray()) {

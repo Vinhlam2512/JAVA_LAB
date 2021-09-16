@@ -13,9 +13,11 @@ import java.util.Scanner;
  * @author VINH
  */
 public class Views {
+
     Controllers ctl = new Controllers();
     Scanner sc = new Scanner(System.in);
-    public int input(){
+
+    public int input() {
         int size;
         do {
             System.out.print("Enter number of array: ");
@@ -28,13 +30,14 @@ public class Views {
         } while (size <= 0);
         return size;
     }
-    public void inputArray(int arr[], int size){
-            Random rad = new Random(); 
+
+    public void randomArray(int arr[], int size) {
+        Random rad = new Random();
         for (int i = 0; i < size; i++) {
             arr[i] = rad.nextInt(size - 1) + 1;
         }
     }
-    
+
     public void printArr(int arr[], int size) {
         int i;
         System.out.print("[");
@@ -47,5 +50,5 @@ public class Views {
         }
         System.out.println("]");
     }
-   
+
 }

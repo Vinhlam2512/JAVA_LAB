@@ -15,12 +15,13 @@ import java.util.Scanner;
 public class main {
 
     public static void main(String[] args) {
+                
         Views views = new Views();
         Controllers control = new Controllers();
         Scanner sc = new Scanner(System.in);
         int size = views.input();
         int arr[] = new int[size];
-        views.inputArray(arr, size);
+        views.randomArray(arr, size);
         System.out.print("Unsorted array: ");
         views.printArr(arr, size);
         control.bubbleSort(arr);

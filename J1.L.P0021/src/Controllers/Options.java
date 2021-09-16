@@ -27,28 +27,29 @@ public class Options {
     public void create(ArrayList<Student> students) {
         int id, semester;
         String name, course;
-        int count = 0;
-        while (count != 1) {
-            while (true) {
-                id = get.getId("Input id of student: ", "That is not positive number!");
-                if (checkInput.checkId(students, id) != 0) {
-                    System.out.println("Id is already exist!");
-                } else {
-                    break;
+        int count = 1;
+        while (count != 3) {
+            id = get.getId("Input id of student: ", "That is not positive number!");
+            do {
+                name = get.getName("Input name of student: ", "Please input correct name of student!");
+                if (checkInput.checkName(students, id, name) == -1) {
+                    System.out.println("Please input correct name of student!");
                 }
-            }
-            name = get.getName("Input name of student: ", "Please input correct name of student!");
+            } while (checkInput.checkName(students, id, name) == -1);
+
             semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
             course = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
             students.add(new Student(id, name, semester, course));
+            System.out.println("-------------------------------------------------");
+            System.out.println("");
             count++;
-            if (count == 1) {
+            if (count == 3 || count == 1) {
                 String choice = checkInput.isContinue();
                 if (choice == "Y") {
                     count = 0;
-                    System.out.println("tiep");
+                    System.out.println("Continue!");
                 } else {
-                    System.out.println("dung");
+                    System.out.println("Stop!");
                     break;
                 }
             }
@@ -65,9 +66,17 @@ public class Options {
             System.out.println("This name does not exist");
             return;
         }
-        ultil.sort(listStudentFindByName);
+        Collections.sort(listStudentFindByName, (Student o1, Student o2) -> {
+            if (o1.getName().compareTo(o2.getName()) > 0) {
+                return 1;
+            } else if (o1.getName().compareTo(o2.getName()) < 0) {
+                return -1;
+            } else {
+                return (o1.getSemester() - o2.getSemester());
+            }
+        });
         for (Student student : listStudentFindByName) {
-            System.out.println(student.toString());
+            System.out.println(student.toStringNoId());
         }
     }
 
@@ -77,55 +86,49 @@ public class Options {
             return;
         }
         ArrayList<Student> listStudentFindById = ultil.listStudentFindById(students);
-        System.out.println(listStudentFindById);
+        for (Student student : listStudentFindById) {
+            System.out.println(student);
+        }
+        int index;
         if (listStudentFindById.isEmpty()) {
             System.out.println("This id does not exist");
             return;
         }
         int choice = ultil.uOrD();
         if (choice == 1) {
-            students.remove(listStudentFindById.get(0));
-            System.out.println("Delete success!");
+            ultil.delete(students, listStudentFindById);
         }
         if (choice == 2) {
-            int id, semester;
-            String name, course;
-            while (true) {
-                id = get.getId("Input id of student: ", "That is not positive number!");
-                if (checkInput.checkId(students, id) != 0) {
-                    System.out.println("Id is already exist!");
-                } else {
-                    break;
-                }
-            }
-            name = get.getName("Input name of student: ", "Please input correct name of student!");
-            semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
-            course = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ");
-            students.set(ultil.indexFlag, new Student(id, name, semester, course));
-            System.out.println("Update success!");
+            ultil.update(students, listStudentFindById);
         }
     }
 
     public void report(ArrayList<Student> students) {
         int i;
-        int total[] = new int[students.size()];
         if (students.isEmpty()) {
             System.out.println("List empty.");
             return;
         }
         ArrayList<Report> reports = new ArrayList<>();
         String courseName, name;
+        int id, semester;
         int size = students.size();
-        for (i = 0; i < students.size(); i++) {
-            total[i] = 1;
-            courseName = students.get(i).getCourseName();
-            name = students.get(i).getName();
-            if (courseName.equalsIgnoreCase(students.get(i).getCourseName())) {
-                total[i]++;
+        for (Student student : students) {
+            int total = 0;
+            id = student.getId();
+            courseName = student.getCourseName();
+            name = student.getName();
+            for (Student studentCountTotal : students) {
+                if (id == studentCountTotal.getId() && courseName.equalsIgnoreCase(studentCountTotal.getCourseName())) {
+                    total++;
+                }
             }
-            reports.add(new Report(name, courseName, total[i]));
+            if (ultil.checkReportExist(reports, name, courseName, total)) {
+                reports.add(new Report(name, courseName, total));
+            }
         }
         //print report
+        System.out.println("-------------- The Report --------------");
         for (i = 0; i < reports.size(); i++) {
             System.out.println(reports.get(i).toString());
         }

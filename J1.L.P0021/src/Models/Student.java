@@ -60,7 +60,10 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student " + "id: " + id + "\t | Name: " + name + "\t | Semester: " + semester + "\t | Course name:" + courseName ;
+        return "Student " + "id: " + id + "\t\t | Name: " + name + "\t\t | Semester: " + semester + "\t\t | Course name:" + courseName ;
+    }
+    public String toStringNoId() {
+        return "| Name: " + name + "\t\t | Semester: " + semester + "\t\t | Course name:" + courseName ;
     }
 
 }

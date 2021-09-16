@@ -102,6 +102,7 @@ public class Get {
         }
         return dob;
     }
+//    25/12/2001
 
     public String getSex(String inputMsg, String errMsg) {
         String[] sexs = {"male", "female"};

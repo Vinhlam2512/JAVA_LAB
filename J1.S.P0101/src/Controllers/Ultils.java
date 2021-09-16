@@ -16,18 +16,19 @@ import java.util.Scanner;
 public class Ultils {
 
     Scanner sc = new Scanner(System.in);
+    int indexFlag;
 
     public ArrayList<Employee> findById(ArrayList<Employee> employees) {
         ArrayList<Employee> listEmployeeFindById = new ArrayList<>();
         System.out.print("Input id you want to find: ");
+        int i;
         int fId = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getId() == fId) {
+        int size = employees.size();
+        for (i = 0; i < size; i++) {
+            if(employees.get(i).getId() == fId){
+                indexFlag = i;
                 listEmployeeFindById.add(employees.get(i));
             }
-        }
-        if (listEmployeeFindById == null || listEmployeeFindById.isEmpty()) {
-            return null;
         }
         return listEmployeeFindById;
     }
@@ -41,4 +42,17 @@ public class Ultils {
         }
         return true;
     }
+    public ArrayList<Employee> findByName(ArrayList<Employee> employees, String fName) {
+        ArrayList<Employee> listEmployeeFindByName = new ArrayList<>();
+        int i;
+        int size = employees.size();
+        for (i = 0; i < size; i++) {
+            if(employees.get(i).getLastName().contains(fName) || employees.get(i).getFirstName().contains(fName)){
+                indexFlag = i;
+                listEmployeeFindByName.add(employees.get(i));
+            }
+        }
+        return listEmployeeFindByName;
+    }
+  
 }
