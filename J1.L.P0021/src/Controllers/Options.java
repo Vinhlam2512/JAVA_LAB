@@ -22,28 +22,31 @@ public class Options {
     Get get = new Get();
     checkInput checkInput = new checkInput();
     Scanner sc = new Scanner(System.in);
-    int check = 0;
 
     public void create(ArrayList<Student> students) {
         int id, semester;
+        int check;
         String name, course;
         int count = 1;
-        while (count != 3) {
+        while (count != 2) {
             id = get.getId("Input id of student: ", "That is not positive number!");
             do {
                 name = get.getName("Input name of student: ", "Please input correct name of student!");
-                if (checkInput.checkName(students, id, name) == -1) {
+                check = checkInput.checkName(students, id, name);
+
+                if (check == -1) {
                     System.out.println("Please input correct name of student!");
                 }
-            } while (checkInput.checkName(students, id, name) == -1);
-
+            } while (check == -1);
             semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
             course = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
-            students.add(new Student(id, name, semester, course));
+            if (!ultil.checkStudentExist(students, name, course, id, semester)) {
+                            students.add(new Student(id, name, semester, course));
+            }
             System.out.println("-------------------------------------------------");
             System.out.println("");
             count++;
-            if (count == 3 || count == 1) {
+            if (count == 2 || count == 1) {
                 String choice = checkInput.isContinue();
                 if (choice == "Y") {
                     count = 0;
@@ -116,21 +119,25 @@ public class Options {
         for (Student student : students) {
             int total = 0;
             id = student.getId();
+            semester = student.getSemester();
             courseName = student.getCourseName();
             name = student.getName();
             for (Student studentCountTotal : students) {
-                if (id == studentCountTotal.getId() && courseName.equalsIgnoreCase(studentCountTotal.getCourseName())) {
+                if (name.equalsIgnoreCase(studentCountTotal.getName())
+                        && courseName.equalsIgnoreCase(studentCountTotal.getCourseName())
+                        && id == studentCountTotal.getId()) {
                     total++;
                 }
             }
-            if (ultil.checkReportExist(reports, name, courseName, total)) {
-                reports.add(new Report(name, courseName, total));
+            if (ultil.checkReportExist(reports, name, courseName, id) == true) {
+                reports.add(new Report(name, courseName, total, id));
             }
         }
         //print report
         System.out.println("-------------- The Report --------------");
+        System.out.println("| Name \t\t      | Course name   | Total course");
         for (i = 0; i < reports.size(); i++) {
-            System.out.println(reports.get(i).toString());
+            System.out.println(" " + reports.get(i).toString());
         }
     }
 }

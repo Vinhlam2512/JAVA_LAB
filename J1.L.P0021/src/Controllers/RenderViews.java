@@ -21,7 +21,8 @@ public class RenderViews {
         ArrayList<Student> students = new ArrayList();
 
         students.add(new Student(1, "Nguyen Van A", 1, "C"));
-        students.add(new Student(2, "Nguyen Van K", 2, "Java"));
+        students.add(new Student(5, "Nguyen Van K", 2, "C"));
+        students.add(new Student(5, "Nguyen Van K", 9, "C"));
         students.add(new Student(2, "Nguyen Van K", 5, "Java"));
         students.add(new Student(7, "Nguyen Van Z", 2, "C"));
         students.add(new Student(8, "Nguyen Van B", 7, "JAVA"));
@@ -55,6 +56,8 @@ public class RenderViews {
                 case 5:
                     return;
                 case 6:
+                            System.out.println("|Student id    | Name \t\t      | Semester      | Course name");
+
                     for (int i = 0; i < students.size(); i++) {
                         System.out.println(students.get(i).toString());
                     }

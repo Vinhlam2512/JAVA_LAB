@@ -60,7 +60,6 @@ public class checkInput {
             return -1;
         }
         for (Student student : students) {
-
             if (student.getId() == id && student.getName().equalsIgnoreCase(name)) {
                 return 1;
             }

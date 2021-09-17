@@ -18,6 +18,7 @@ public class Ultils {
 
     checkInput checkInput = new checkInput();
     Get get = new Get();
+
     Scanner sc = new Scanner(System.in);
     int indexFlag;
 
@@ -54,7 +55,7 @@ public class Ultils {
         System.out.print("Input name you want to find: ");
         String fName = sc.nextLine();
         for (i = 0; i < student.size(); i++) {
-            if (containName(fName, student.get(i).getName())) {
+            if (student.get(i).getName().contains(fName)) {
                 listStudentFindByName.add(student.get(i));
             }
         }
@@ -93,22 +94,23 @@ public class Ultils {
     }
 
     public void updateInfor(ArrayList<Student> students) {
-        int id, semester;
+        int id, semester, check;
         String name, courseName;
         id = get.getId("Input id of student: ", "That is not positive number!");
         do {
             name = get.getName("Input name of student: ", "Please input correct name of student!");
-            if (checkInput.checkName(students, id, name) == -1) {
-                System.out.println(name);
-                System.out.println(checkInput.checkName(students, id, name));
+            check = checkInput.checkName(students, id, name);
+
+            if (check == -1) {
                 System.out.println("Please input correct name of student!");
             }
-        } while (checkInput.checkName(students, id, name) == -1);
-
+        } while (check == -1);
         semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
         courseName = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
-
-        students.set(indexFlag, new Student(id, name, semester, courseName));
+        if (!checkStudentExist(students, name, courseName, id, semester)) {
+            students.set(indexFlag, new Student(id, name, semester, courseName));
+            System.out.println("Update success!");
+        }
     }
 
     public void updateInfors(ArrayList<Student> students, int idUpdate) {
@@ -120,21 +122,16 @@ public class Ultils {
         do {
             name = get.getName("Input name of student: ", "Please input correct name of student!");
             check = checkInput.checkName(students, id, name);
-            for (Student student : students) {
-                if (student.getId() != id) {
-                    check = 1;
-                }
-            }
             if (check == -1) {
-                System.out.println(checkInput.checkName(students, id, name));
                 System.out.println("Please input correct name of student!");
             }
         } while (check == -1);
-
         semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
         courseName = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
-
-        students.set(idUpdate, new Student(id, name, semester, courseName));
+        if (!checkStudentExist(students, name, courseName, id, semester)) {
+            students.set(idUpdate, new Student(id, name, semester, courseName));
+            System.out.println("Update success!");
+        }
     }
 
     public int getIdToUpdate(ArrayList<Student> students, ArrayList<Student> listStudentFindById, int index) {
@@ -158,17 +155,33 @@ public class Ultils {
         } else {
             updateInfor(students);
         }
-        System.out.println("Update success!");
     }
 
-    public boolean checkReportExist(ArrayList<Report> reports, String name, String courseName, int total) {
+    public boolean checkReportExist(ArrayList<Report> reports, String name, String courseName, int id) {
         for (Report report : reports) {
             if (name.equalsIgnoreCase(report.getName())
                     && courseName.equalsIgnoreCase(report.getCourseName())
-                    && total == report.getTotalCourse()) {
+                    && id == report.getId()) {
+                System.out.println("FALSE");
                 return false;
             }
+            System.out.println(id + "-------" + report.getId());
         }
         return true;
+    }
+
+    public boolean checkStudentExist(ArrayList<Student> students, String name, String courseName, int id, int semester) {
+        for (Student student : students) {
+            if (name.equalsIgnoreCase(student.getName())
+                    && courseName.equalsIgnoreCase(student.getCourseName())
+                    && id == student.getId()
+                    && semester == student.getSemester()) {
+                System.out.println("");
+                System.out.println("Infor of student is exist!");
+                return true;
+            }
+            System.out.println(id + "-------" + student.getId());
+        }
+        return false;
     }
 }

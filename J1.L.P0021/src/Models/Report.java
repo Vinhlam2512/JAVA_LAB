@@ -13,14 +13,26 @@ public class Report {
     private String name;
     private String courseName;
     private int totalCourse;
+    private int id;
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Report() {
     }
     
-    public Report(String name, String courseName, int totalCourse) {
+    public Report(String name, String courseName, int totalCourse, int id) {
         this.name = name;
         this.courseName = courseName;
         this.totalCourse = totalCourse;
+        this.id = id;
     }
 
     public String getName() {
@@ -49,7 +61,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\t\t | CourseName: " + courseName + " \t\t| TotalCourse: " + totalCourse;
+        return  " "  + name  + "\t\t" + courseName + "\t\t" + totalCourse ;
     }
 
 }
