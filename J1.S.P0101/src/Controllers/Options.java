@@ -66,34 +66,47 @@ public class Options {
     public void removeEmployees(ArrayList<Employee> employees) {
         ArrayList<Employee> listEmployeeFindById = ultil.findById(employees);
         if (listEmployeeFindById.isEmpty()) {
-            System.out.println("---------------------- List is Empty! ----------------------");
+            System.out.println("---------------------- ID does not exist! ----------------------");
             return;
         }
-        System.out.println(listEmployeeFindById);
-        employees.remove(listEmployeeFindById.get(0));
-        System.out.println("------------------------ Remove Success! ------------------------");
+        System.out.println(" ID | FIRST NAME | LAST NAME |    PHONE   |      EMAIL     | ADDRESS |     DOB    |   SEX  |   SALARY  | EGENCY |");
+        for (Employee employee : listEmployeeFindById) {
+            System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
+            System.out.println(employee);
+        }
+        System.out.println("");
+        System.out.println("------------------------------------------- Remove Success! --------------------------------------------------------");
     }
 
     public void searchEmployees(ArrayList<Employee> employees) {
         String firstName;
-        firstName = get.getName("Input Name you want find: ", "Please input first name!");
+        firstName = get.getName("Input name you want find: ", "Please input name!");
         ArrayList<Employee> listEmployeeFindByName = ultil.findByName(employees, firstName);
+        if (listEmployeeFindByName.isEmpty()) {
+            System.out.println("---------------------- NAME does not exist! ----------------------");
+            return;
+        }
+        System.out.println(" ID | FIRST NAME | LAST NAME |    PHONE   |      EMAIL     | ADDRESS |     DOB    |   SEX  |   SALARY  | EGENCY |");
+
         for (Employee employee : listEmployeeFindByName) {
+            System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
             System.out.println(employee);
         }
     }
-    
-    public void sortEmployees(ArrayList<Employee> employees){
-        Collections.sort(employees, (Employee e1, Employee e2) ->{
-            if(e1.getLastName().compareTo(e2.getLastName()) > 0){
+
+    public void sortEmployees(ArrayList<Employee> employees) {
+        Collections.sort(employees, (Employee e1, Employee e2) -> {
+            if (e1.getSalary().compareTo(e2.getSalary()) > 0) {
                 return 1;
-            }else if(e1.getLastName().compareTo(e2.getLastName()) < 0){
+            } else if (e1.getSalary().compareTo(e2.getSalary()) < 0) {
                 return -1;
-            }else{
+            } else {
                 return e1.getId() - e2.getId();
             }
         });
+        System.out.println(" ID | FIRST NAME | LAST NAME |    PHONE   |      EMAIL     | ADDRESS |     DOB    |   SEX  |   SALARY  | EGENCY |");
         for (Employee employee : employees) {
+            System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
             System.out.println(employee);
         }
     }

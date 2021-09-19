@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class checkInput {
 
     Scanner sc = new Scanner(System.in);
+    private int check;
 
     public int choiceInput() {
         int choice;
@@ -60,7 +61,15 @@ public class checkInput {
             return -1;
         }
         for (Student student : students) {
-            if (student.getId() == id && student.getName().equalsIgnoreCase(name)) {
+            for (Student student1 : students) {
+                if (student1.getId() == id) {
+                    check = 1;
+                }
+            }
+            if ((student.getId() == id && student.getName().equalsIgnoreCase(name))) {
+                return 1;
+            }
+            if (check != 1) {
                 return 1;
             }
         }

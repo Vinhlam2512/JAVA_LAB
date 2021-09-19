@@ -36,7 +36,7 @@ public class Ultils {
     public boolean checkDuplicateId(ArrayList<Employee> employees, int id) {
         int i;
         for (i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getId() == id) {
+            if (employees.get(i).getId() == id && employees.get(indexFlag).getId() != id) {
                 return false;
             }
         }
@@ -47,7 +47,7 @@ public class Ultils {
         int i;
         int size = employees.size();
         for (i = 0; i < size; i++) {
-            if(employees.get(i).getLastName().contains(fName) || employees.get(i).getFirstName().contains(fName)){
+            if(employees.get(i).getLastName().toUpperCase().contains(fName.toUpperCase()) || employees.get(i).getFirstName().toUpperCase().contains(fName.toUpperCase())){
                 indexFlag = i;
                 listEmployeeFindByName.add(employees.get(i));
             }

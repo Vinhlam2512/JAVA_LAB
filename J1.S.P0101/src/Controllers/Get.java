@@ -39,8 +39,6 @@ public class Get {
             name = sc.nextLine().trim();
             if (!check.hasNumber(name)) {
                 System.out.println(errMsg);
-                System.out.print(inputMsg);
-                name = sc.nextLine();
             } else {
                 return name;
             }

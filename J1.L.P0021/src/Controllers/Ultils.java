@@ -55,7 +55,8 @@ public class Ultils {
         System.out.print("Input name you want to find: ");
         String fName = sc.nextLine();
         for (i = 0; i < student.size(); i++) {
-            if (student.get(i).getName().contains(fName)) {
+            if (student.get(i).getName().toUpperCase().contains(fName.toUpperCase())) {
+                System.out.println("11111111111111111");
                 listStudentFindByName.add(student.get(i));
             }
         }

@@ -120,7 +120,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return  "Id: " + id + " | FirstName: " + firstName + " | LastName: " + lastName + " | Phone: " + phone + " | Email: " + email + " | Address: " + address + " | DateOfBirth: " + dateOfBirth + " | Sex: " + sex + " | Salary: " + salary + " | Egency: " + egency;
+        return  "| " + id + " | " + firstName + " | " + lastName + " | " + phone + " | " + email + " | " + address + " | " + dateOfBirth + " | " + sex + " | " + salary + " | " + egency +"   |";
     }
 
 }
