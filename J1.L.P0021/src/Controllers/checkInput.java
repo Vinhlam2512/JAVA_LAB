@@ -58,7 +58,7 @@ public class checkInput {
     public int checkName(ArrayList<Student> students, int id, String name) {
         int i;
         if (students.isEmpty()) {
-            return -1;
+            return 1;
         }
         for (Student student : students) {
             for (Student student1 : students) {

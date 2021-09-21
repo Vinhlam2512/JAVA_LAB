@@ -12,8 +12,9 @@ public class Options {
     checkInput check = new checkInput();
     Ultils ultil = new Ultils();
     Scanner sc = new Scanner(System.in);
+    private ArrayList<Employee> employees = new ArrayList<>();
 
-    public void addEmployees(ArrayList<Employee> employees) {
+    public void addEmployees() {
         int id;
         String firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency;
         do {
@@ -34,7 +35,7 @@ public class Options {
         employees.add(new Employee(id, firstName, lastName, phone, email, address, dateOfBirth, sex, salary, egency));
     }
 
-    public void updateEmployees(ArrayList<Employee> employees) {
+    public void updateEmployees() {
         ArrayList<Employee> listEmployeeFindById = ultil.findById(employees);
         if (listEmployeeFindById.isEmpty()) {
             System.out.println("---------------------- List is Empty! ----------------------");
@@ -63,7 +64,7 @@ public class Options {
         System.out.println("------------------------ Update Success! ------------------------");
     }
 
-    public void removeEmployees(ArrayList<Employee> employees) {
+    public void removeEmployees() {
         ArrayList<Employee> listEmployeeFindById = ultil.findById(employees);
         if (listEmployeeFindById.isEmpty()) {
             System.out.println("---------------------- ID does not exist! ----------------------");
@@ -73,12 +74,13 @@ public class Options {
         for (Employee employee : listEmployeeFindById) {
             System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
             System.out.println(employee);
+            employees.remove(employee);
         }
         System.out.println("");
         System.out.println("------------------------------------------- Remove Success! --------------------------------------------------------");
     }
 
-    public void searchEmployees(ArrayList<Employee> employees) {
+    public void searchEmployees() {
         String firstName;
         firstName = get.getName("Input name you want find: ", "Please input name!");
         ArrayList<Employee> listEmployeeFindByName = ultil.findByName(employees, firstName);
@@ -94,7 +96,7 @@ public class Options {
         }
     }
 
-    public void sortEmployees(ArrayList<Employee> employees) {
+    public void sortEmployees() {
         Collections.sort(employees, (Employee e1, Employee e2) -> {
             if (e1.getSalary().compareTo(e2.getSalary()) > 0) {
                 return 1;
@@ -109,5 +111,24 @@ public class Options {
             System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
             System.out.println(employee);
         }
+    }
+
+    public void test() {
+        System.out.println(" ID | FIRST NAME | LAST NAME |    PHONE   |      EMAIL     | ADDRESS |     DOB    |   SEX  |   SALARY  | EGENCY |");
+        for (Employee employee : employees) {
+            System.out.println("----+------------+-----------+------------+----------------+---------+------------+--------+-----------+---------");
+
+            System.out.println(employee.toString());
+        }
+    }
+    public void add(){
+        employees.add(new Employee(6, "Nguyen Van", "    Z    ", "1234567890", "abcd@gmail.com", "   HN  ", "12/12/2001", "male  ", "888888888", "  SE"));
+        employees.add(new Employee(2, "Nguyen Duy", "    B    ", "1234567890", "abcd@gmail.com", "   BG  ", "12/12/1999", "female", "222222222", "  AI"));
+        employees.add(new Employee(3, "Nguyen Duy", "    B    ", "1234567890", "abcd@gmail.com", "   SG  ", "12/12/1967", "male  ", "999999999", "  IA"));
+        employees.add(new Employee(5, "Nguyen Duy", "    C    ", "1234567890", "abcd@gmail.com", "   HT  ", "12/12/1990", "female", "666666666", "  AI"));
+        employees.add(new Employee(4, "Nguyen Van", "    F    ", "1234567890", "abcd@gmail.com", "   QN  ", "12/12/1970", "male  ", "444444444", "  IA"));
+        employees.add(new Employee(7, "Nguyen Van", "    D    ", "1234567890", "abcd@gmail.com", "   HL  ", "12/12/1980", "male  ", "777777777", "  SE"));
+        employees.add(new Employee(1, "Nguyen Duy", "    F    ", "1234567890", "abcd@gmail.com", "   LC  ", "12/12/1990", "female", "888888888", "  AI"));
+        employees.add(new Employee(8, "Nguyen Van", "    K    ", "1234567890", "abcd@gmail.com", "   BG  ", "12/12/1985", "female", "333333333", "  SE"));
     }
 }

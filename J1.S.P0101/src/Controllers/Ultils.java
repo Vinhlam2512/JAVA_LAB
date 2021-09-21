@@ -17,12 +17,11 @@ public class Ultils {
 
     Scanner sc = new Scanner(System.in);
     int indexFlag;
-
+    Get get = new Get();
     public ArrayList<Employee> findById(ArrayList<Employee> employees) {
         ArrayList<Employee> listEmployeeFindById = new ArrayList<>();
-        System.out.print("Input id you want to find: ");
         int i;
-        int fId = Integer.parseInt(sc.nextLine());
+        int fId = get.getId("Input id you want to find: ", "You need to input number!");
         int size = employees.size();
         for (i = 0; i < size; i++) {
             if(employees.get(i).getId() == fId){

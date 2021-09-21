@@ -16,14 +16,15 @@ import java.util.Comparator;
  *
  * @author VINH
  */
-public class Options {
+public class Controller {
 
     Ultils ultil = new Ultils();
     Get get = new Get();
     checkInput checkInput = new checkInput();
     Scanner sc = new Scanner(System.in);
-
-    public void create(ArrayList<Student> students) {
+    private static  ArrayList<Student> students = new ArrayList();
+    public void create() {
+        System.out.println(students.isEmpty());
         int id, semester;
         int check;
         String name, course;
@@ -41,8 +42,9 @@ public class Options {
             semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
             course = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
             if (!ultil.checkStudentExist(students, name, course, id, semester)) {
-                            students.add(new Student(id, name, semester, course));
+                students.add(new Student(id, name, semester, course));
             }
+
             System.out.println("-------------------------------------------------");
             System.out.println("");
             count++;
@@ -59,7 +61,7 @@ public class Options {
         }
     }
 
-    public void findAndSort(ArrayList<Student> students) {
+    public void findAndSort() {
         if (students.isEmpty()) {
             System.out.println("List is empty!");
             return;
@@ -83,7 +85,7 @@ public class Options {
         }
     }
 
-    public void updateOrDelete(ArrayList<Student> students) {
+    public void updateOrDelete() {
         if (students.isEmpty()) {
             System.out.println("List is empty!");
             return;
@@ -106,7 +108,7 @@ public class Options {
         }
     }
 
-    public void report(ArrayList<Student> students) {
+    public void report() {
         int i;
         if (students.isEmpty()) {
             System.out.println("List empty.");
@@ -139,5 +141,22 @@ public class Options {
         for (i = 0; i < reports.size(); i++) {
             System.out.println(" " + reports.get(i).toString());
         }
+    }
+
+    public void demo() {
+        System.out.println("|Student id    | Name \t\t      | Semester      | Course name");
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println(students.get(i).toString());
+        }
+    }
+
+    public void test() {
+        students.add(new Student(1, "Nguyen Van A", 1, "C"));
+        students.add(new Student(5, "Nguyen Van K", 2, "C"));
+        students.add(new Student(5, "Nguyen Van K", 9, "C"));
+        students.add(new Student(2, "Nguyen Van K", 5, "Java"));
+        students.add(new Student(7, "Nguyen Van Z", 2, "C"));
+        students.add(new Student(8, "Nguyen Van B", 7, "JAVA"));
+        students.add(new Student(9, "Nguyen Van F", 8, "C"));
     }
 }
