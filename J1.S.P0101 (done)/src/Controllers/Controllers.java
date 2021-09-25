@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import Models.Employee;
 import java.util.Collections;
 
-public class Options {
+public class Controllers {
 
     Get get = new Get();
     checkInput check = new checkInput();
@@ -122,7 +122,7 @@ public class Options {
         }
     }
     public void add(){
-        employees.add(new Employee(6, "Nguyen Van", "    Z    ", "1234567890", "abcd@gmail.com", "   HN  ", "12/12/2001", "male  ", "888888888", "  SE"));
+        employees.add(new Employee(6, "Nguyen Van", "Z", "1234567890", "abcd@gmail.com", "   HN  ", "12/12/2001", "male  ", "888888888", "  SE"));
         employees.add(new Employee(2, "Nguyen Duy", "    B    ", "1234567890", "abcd@gmail.com", "   BG  ", "12/12/1999", "female", "222222222", "  AI"));
         employees.add(new Employee(3, "Nguyen Duy", "    B    ", "1234567890", "abcd@gmail.com", "   SG  ", "12/12/1967", "male  ", "999999999", "  IA"));
         employees.add(new Employee(5, "Nguyen Duy", "    C    ", "1234567890", "abcd@gmail.com", "   HT  ", "12/12/1990", "female", "666666666", "  AI"));

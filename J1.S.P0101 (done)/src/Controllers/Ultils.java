@@ -44,9 +44,11 @@ public class Ultils {
     public ArrayList<Employee> findByName(ArrayList<Employee> employees, String fName) {
         ArrayList<Employee> listEmployeeFindByName = new ArrayList<>();
         int i;
+        String name;
         int size = employees.size();
         for (i = 0; i < size; i++) {
-            if(employees.get(i).getLastName().toUpperCase().contains(fName.toUpperCase()) || employees.get(i).getFirstName().toUpperCase().contains(fName.toUpperCase())){
+              name = employees.get(i).getFirstName().toUpperCase() + " " + employees.get(i).getLastName().toUpperCase();
+            if(name.contains(fName.toUpperCase())){
                 indexFlag = i;
                 listEmployeeFindByName.add(employees.get(i));
             }

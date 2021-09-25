@@ -8,6 +8,7 @@ package Views;
 import Controllers.Controller;
 import Controllers.RenderViews;
 import Controllers.checkInput;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,6 @@ public class Main {
         checkInput check = new checkInput();
         Controller ops = new Controller();
         Scanner sc = new Scanner(System.in);
-        
         do {
             System.out.println("-----------------------------");
             System.out.println("WELCOME TO STUDENT MANAGEMENT");

@@ -98,14 +98,12 @@ public class Ultils {
         int id, semester, check;
         String name, courseName;
         id = get.getId("Input id of student: ", "That is not positive number!");
-        do {
+        if (checkInput.idIsExist(students, id) != null) {
+            name = checkInput.idIsExist(students, id);
+            System.out.println("Name of student: " + name);
+        } else {
             name = get.getName("Input name of student: ", "Please input correct name of student!");
-            check = checkInput.checkName(students, id, name);
-
-            if (check == -1) {
-                System.out.println("Please input correct name of student!");
-            }
-        } while (check == -1);
+        }
         semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
         courseName = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
         if (!checkStudentExist(students, name, courseName, id, semester)) {
@@ -120,13 +118,12 @@ public class Ultils {
         int size = students.size();
         int check;
         id = get.getId("Input id of student: ", "That is not positive number!");
-        do {
+        if (checkInput.idIsExist(students, id) != null) {
+            name = checkInput.idIsExist(students, id);
+            System.out.println("Name of student: " + name);
+        } else {
             name = get.getName("Input name of student: ", "Please input correct name of student!");
-            check = checkInput.checkName(students, id, name);
-            if (check == -1) {
-                System.out.println("Please input correct name of student!");
-            }
-        } while (check == -1);
+        }
         semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
         courseName = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
         if (!checkStudentExist(students, name, courseName, id, semester)) {
@@ -178,7 +175,7 @@ public class Ultils {
                     && id == student.getId()
                     && semester == student.getSemester()) {
                 System.out.println("");
-                System.out.println("Infor of student is exist!");
+                System.out.println("Infor of student is exist! Can't add");
                 return true;
             }
             System.out.println(id + "-------" + student.getId());

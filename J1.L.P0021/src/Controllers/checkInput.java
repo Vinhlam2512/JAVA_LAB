@@ -8,7 +8,6 @@ package Controllers;
 import Models.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 /**
  *
  * @author VINH
@@ -55,25 +54,19 @@ public class checkInput {
         return false;
     }
 
-    public int checkName(ArrayList<Student> students, int id, String name) {
+    public String idIsExist(ArrayList<Student> students, int id) {
         int i;
+        String name;
         if (students.isEmpty()) {
-            return 1;
+            return null;
         }
         for (Student student : students) {
-            for (Student student1 : students) {
-                if (student1.getId() == id) {
-                    check = 1;
-                }
-            }
-            if ((student.getId() == id && student.getName().equalsIgnoreCase(name))) {
-                return 1;
-            }
-            if (check != 1) {
-                return 1;
+            if (student.getId() == id) {
+                return student.getName();
             }
         }
-        return -1;
+        return  null;
+
     }
 
     public boolean checkCourse(ArrayList<Student> students, int semester, String courseName) {

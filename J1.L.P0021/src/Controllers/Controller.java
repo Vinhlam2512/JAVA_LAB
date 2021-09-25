@@ -22,7 +22,8 @@ public class Controller {
     Get get = new Get();
     checkInput checkInput = new checkInput();
     Scanner sc = new Scanner(System.in);
-    private static  ArrayList<Student> students = new ArrayList();
+    private ArrayList<Student> students = new ArrayList();
+
     public void create() {
         System.out.println(students.isEmpty());
         int id, semester;
@@ -31,14 +32,12 @@ public class Controller {
         int count = 1;
         while (count != 2) {
             id = get.getId("Input id of student: ", "That is not positive number!");
-            do {
+            if (checkInput.idIsExist(students, id) != null) {
+                name = checkInput.idIsExist(students, id);
+                System.out.println("Name of student: "  + name);
+            } else {
                 name = get.getName("Input name of student: ", "Please input correct name of student!");
-                check = checkInput.checkName(students, id, name);
-
-                if (check == -1) {
-                    System.out.println("Please input correct name of student!");
-                }
-            } while (check == -1);
+            }
             semester = get.getSemester("Input semester: ", "Please input semeter form 1 to 9!");
             course = get.getCourseName("Input course: ", "Plesase input (Java or .Net or C or C++)! ").toUpperCase();
             if (!ultil.checkStudentExist(students, name, course, id, semester)) {
@@ -152,9 +151,10 @@ public class Controller {
 
     public void test() {
         students.add(new Student(1, "Nguyen Van A", 1, "C"));
+        students.add(new Student(5, "Nguyen Van K", 2, ".NET"));
         students.add(new Student(5, "Nguyen Van K", 2, "C"));
-        students.add(new Student(5, "Nguyen Van K", 9, "C"));
-        students.add(new Student(2, "Nguyen Van K", 5, "Java"));
+        students.add(new Student(5, "Nguyen Van K", 2, "C++"));
+        students.add(new Student(5, "Nguyen Van K", 2, "Java"));
         students.add(new Student(7, "Nguyen Van Z", 2, "C"));
         students.add(new Student(8, "Nguyen Van B", 7, "JAVA"));
         students.add(new Student(9, "Nguyen Van F", 8, "C"));

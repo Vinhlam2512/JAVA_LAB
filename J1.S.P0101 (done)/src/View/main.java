@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controllers.Options;
+import Controllers.Controllers;
 import Controllers.RenderView;
 import Controllers.checkInput;
 import Models.Employee;
@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class main {
 
     public static void main(String[] args) {
-        Options ops = new Options();
+        Controllers ops = new Controllers();
         checkInput check = new checkInput();
         Scanner sc = new Scanner(System.in);
         int choice;

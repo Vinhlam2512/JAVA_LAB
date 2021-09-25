@@ -1,9 +1,4 @@
-package Controllers;
 
-import Controllers.Options;
-import Controllers.checkInput;
-import Models.Employee;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -11,14 +6,15 @@ import java.util.Scanner;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author VINH
  */
-public class RenderView {
-
-    public void render() {
+public class test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         
+        System.out.println("4/2/2021".compareTo("2/3/2021"));
     }
-
 }
