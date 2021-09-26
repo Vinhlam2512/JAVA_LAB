@@ -36,7 +36,7 @@ public class View {
                 sc.next();
             }
             choice = Integer.parseInt(sc.nextLine());
-            if (choice < 1 || choice > 7) {
+            if (choice < 1 || choice > 8) {
                 System.out.println("You need to input choice 1 - 7!");
             }
         } while (choice < 1 || choice > 8);

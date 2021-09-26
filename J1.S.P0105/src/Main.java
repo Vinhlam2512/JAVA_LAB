@@ -1,21 +1,30 @@
 
 import Controllers.Options;
+import Controllers.Validation;
 import java.util.Scanner;
 import Views.View;
+import java.text.ParseException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Scanner sc = new Scanner(System.in);
         View v = new View();
         Options ops = new Options();
-        int choice;
+        Validation val = new Validation();
+        int choice, size, n;
+        String name;
         do {
             v.menu();
             choice = v.inputChoice();
             switch (choice) {
                 case 1:
-                    ops.addStoreKeeper();
+                    size = val.getId("Input number of storeKeeper you want to add: ", "You need to input integer!");
+                    for (int i = 0; i < size; i++) {
+                        n = i + 1;
+                        name = val.getName("Input name of stor keeper " + n +" : ", "You need to input name of stor keeper!");
+                        ops.addStoreKeeper(name);
+                    }
                     break;
                 case 2:
                     ops.add();
@@ -36,7 +45,8 @@ public class Main {
                     ops.show();
                     break;
                 case 8:
-                    return;
+                    ops.showNameStoreKeeper();
+                    break;
             }
         } while (true);
 

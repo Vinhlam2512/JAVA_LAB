@@ -5,6 +5,9 @@
  */
 package Controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -15,8 +18,8 @@ import java.util.Scanner;
 public class Validation {
 
     Scanner sc = new Scanner(System.in);
-
-    int getId(String inputMsg, String errMsg) {
+    
+    public int getId(String inputMsg, String errMsg) {
         int id;
         do {
             System.out.print(inputMsg);
@@ -30,17 +33,18 @@ public class Validation {
         return id;
     }
 
-    String getName(String inputMsg, String errMsg) {
+    public String getName(String inputMsg, String errMsg) {
         String name;
         do {
             System.out.print(inputMsg);
-            name = sc.nextLine().trim();
+            name = sc.nextLine().trim().toUpperCase();
             if (!name.matches("[a-zA-Z]+")) {
                 System.out.println(errMsg);
             }
         } while (!name.matches("[a-zA-Z]+"));
         return name;
     }
+    
 
     String getString(String inputMsg) {
         String string;
@@ -62,25 +66,27 @@ public class Validation {
         } while (price < 1);
         return price;
     }
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    LocalDate getDate(String inputMsg, String errMsg) {
+    String getDate(String inputMsg, String errMsg) {
         String date;
-        String splited[];
-        while (true) {
-            try {
-                System.out.print(inputMsg);
-                date = sc.nextLine().trim();
-                splited = date.split("/");
-                int month = Integer.parseInt(splited[1]);
-                int day = Integer.parseInt(splited[0]);
-                int year = Integer.parseInt(splited[2]);
-                if (year > 1900 && year < 2100) {
-                    LocalDate date1 = LocalDate.of(year, month, day); // check day and month adn year
-                    return date1;
-                }
-            } catch (Exception e) {
-                System.out.println(errMsg);
-            }
+        String[] splited;
+        do {
+            System.out.print(inputMsg);
+            date = sc.nextLine().trim();
+        } while (isDateValid(date) == false);
+        return date;
+    }
+
+    public boolean isDateValid(String date) {
+        try {
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            System.out.println("You need to input like the format dd/mm/yyyy!");
+            return false;
         }
     }
 }
