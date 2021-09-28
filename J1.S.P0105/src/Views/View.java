@@ -16,6 +16,8 @@ public class View {
     Scanner sc = new Scanner(System.in);
 
     public void menu() {
+        System.out.println("");
+        System.out.println("-------------------------------------------------------------------------------------------");
         System.out.println("1.	Add Storekeeper");
         System.out.println("2.	Add product");
         System.out.println("3.	Update product");
@@ -35,7 +37,7 @@ public class View {
                 System.out.print("Input your choice: ");
                 sc.next();
             }
-            choice = Integer.parseInt(sc.nextLine());
+            choice = sc.nextInt();
             if (choice < 1 || choice > 8) {
                 System.out.println("You need to input choice 1 - 7!");
             }

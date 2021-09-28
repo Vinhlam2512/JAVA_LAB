@@ -34,7 +34,7 @@ public class Controller {
             id = get.getId("Input id of student: ", "That is not positive number!");
             if (checkInput.idIsExist(students, id) != null) {
                 name = checkInput.idIsExist(students, id);
-                System.out.println("Name of student: "  + name);
+                System.out.println("Name of student: " + name);
             } else {
                 name = get.getName("Input name of student: ", "Please input correct name of student!");
             }
@@ -89,9 +89,11 @@ public class Controller {
             System.out.println("List is empty!");
             return;
         }
+        int i = 1;
         ArrayList<Student> listStudentFindById = ultil.listStudentFindById(students);
         for (Student student : listStudentFindById) {
-            System.out.println(student);
+            System.out.println(i +"| " + student);
+            i++;
         }
         int index;
         if (listStudentFindById.isEmpty()) {

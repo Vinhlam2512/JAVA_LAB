@@ -30,7 +30,13 @@ public class Main {
                     ops.add();
                     break;
                 case 3:
-                    ops.updateProduct();
+                    int id = val.getId("Input id you want to find to update: ", "You need to input integer!");
+                    boolean check = ops.updateProduct(id);
+                    if(check){
+                        System.out.println("---------------------------------------Update sucess--------------------------------------------");
+                    }else{
+                        System.out.println("id k co");
+                    }
                     break;
                 case 4:
                     ops.search();

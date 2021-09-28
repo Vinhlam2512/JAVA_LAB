@@ -56,7 +56,6 @@ public class Ultils {
         String fName = sc.nextLine();
         for (i = 0; i < student.size(); i++) {
             if (student.get(i).getName().toUpperCase().contains(fName.toUpperCase())) {
-                System.out.println("11111111111111111");
                 listStudentFindByName.add(student.get(i));
             }
         }
@@ -163,7 +162,6 @@ public class Ultils {
                 System.out.println("FALSE");
                 return false;
             }
-            System.out.println(id + "-------" + report.getId());
         }
         return true;
     }
@@ -178,7 +176,6 @@ public class Ultils {
                 System.out.println("Infor of student is exist! Can't add");
                 return true;
             }
-            System.out.println(id + "-------" + student.getId());
         }
         return false;
     }
