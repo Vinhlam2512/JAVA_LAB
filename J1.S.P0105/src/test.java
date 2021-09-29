@@ -17,21 +17,9 @@ import java.util.Scanner;
 public class test {
 
     public static void main(String[] args) throws ParseException {
-        String date1 = "6/8/2000";
-        String date2 = "2/3/2000";
-        Date d1 = sdformat.parse(date1);
-        Date d2 = sdformat.parse(date2);
-        System.out.println(d1.compareTo(d2));
+        name = 
 
     }
 
-    static boolean isDateValid(String date) {
-        try {
-            df.setLenient(false);
-            df.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
+    
 }

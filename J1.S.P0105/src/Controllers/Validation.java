@@ -5,10 +5,13 @@
  */
 package Controllers;
 
+import Models.Product;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -18,7 +21,7 @@ import java.util.Scanner;
 public class Validation {
 
     Scanner sc = new Scanner(System.in);
-    
+
     public int getId(String inputMsg, String errMsg) {
         int id;
         do {
@@ -32,28 +35,36 @@ public class Validation {
         } while (id < 1);
         return id;
     }
-
+    
+    public boolean idIsExist(ArrayList<Product> products, int id, int index) {
+        for (int i = 0; i < products.size(); i++) {
+            if (id == products.get(i).getId() && products.get(index).getId() != id) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public String getName(String inputMsg, String errMsg) {
         String name;
         do {
             System.out.print(inputMsg);
             name = sc.nextLine().trim().toUpperCase();
-            if (!name.matches("[a-zA-Z]+")) {
+            if (!name.matches("^[A-Za-z]+([\\ A-Za-z]+)*")) {
                 System.out.println(errMsg);
             }
-        } while (!name.matches("[a-zA-Z]+"));
+        } while (!name.matches("^[A-Za-z]+([\\ A-Za-z]+)*"));
         return name;
     }
-    
 
-    String getString(String inputMsg) {
+    public String getString(String inputMsg) {
         String string;
         System.out.print(inputMsg);
         string = sc.nextLine().trim();
         return string;
     }
 
-    Double getPrice(String inputMsg, String errMsg) {
+    public Double getPrice(String inputMsg, String errMsg) {
         double price;
         do {
             System.out.print(inputMsg);
@@ -66,9 +77,8 @@ public class Validation {
         } while (price < 1);
         return price;
     }
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    String getDate(String inputMsg, String errMsg) {
+    public String getDate(String inputMsg, String errMsg) {
         String date;
         String[] splited;
         do {
@@ -78,7 +88,20 @@ public class Validation {
         return date;
     }
 
-    public boolean isDateValid(String date) {
+    SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+    public int compareDate(String expiryDate, String manuOfDate) throws ParseException { // compare 2 date
+        Date date1, date2;
+        date1 = sdformat.parse(expiryDate);
+        date2 = sdformat.parse(manuOfDate);
+        if (date1.compareTo(date2) >= 0) {
+            System.out.println("Manufacture Date need after Expiry Date!");
+            return 1;
+        }else{
+            return -1;
+        }
+    }
+
+    public boolean isDateValid(String date) { // check format date
         try {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             df.setLenient(false);
@@ -88,5 +111,25 @@ public class Validation {
             System.out.println("You need to input like the format dd/mm/yyyy!");
             return false;
         }
+    }
+    
+    public String checkName(ArrayList<String> nameStoreKeeper) {
+        if (nameStoreKeeper.size() != 0) {
+            System.out.println("List name of storeKeeper you need to choose:");
+            for (int i = 0; i < nameStoreKeeper.size(); i++) {
+                int n = i + 1;
+                System.out.println(n + ". " + nameStoreKeeper.get(i));
+            }
+            do {
+                String storeKeeper = getName("Input name of storeKeeper: ", "You need to input correct name of store keeper!");
+                for (String str : nameStoreKeeper) {
+                    if (str.equalsIgnoreCase(storeKeeper)) {
+                        return storeKeeper;
+                    }
+                }
+            } while (true);
+        }
+        String storeKeeper = getName("Input name of storeKeeper: ", "You need to input correct name of store keeper!");
+        return storeKeeper;
     }
 }

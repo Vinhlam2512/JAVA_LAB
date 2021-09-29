@@ -5,6 +5,11 @@
  */
 package Views;
 
+import Controllers.Options;
+import Controllers.Validation;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -44,4 +49,54 @@ public class View {
         } while (choice < 1 || choice > 8);
         return choice;
     }
+
+    public void view() throws ParseException {
+        Scanner sc = new Scanner(System.in);
+        View v = new View();
+        Options ops = new Options();
+        Validation val = new Validation();
+        int choice, size, n;
+
+        ArrayList<String> nameStoreKeeper = new ArrayList<>();
+
+        do {
+            v.menu();
+            choice = v.inputChoice();
+            switch (choice) {
+                case 1:
+                    String name;
+                    size = val.getId("Input number of storeKeeper you want to add: ", "You need to input integer!");
+                    for (int i = 0; i < size; i++) {
+                        n = i + 1;
+                        name = val.getName("Input name of stor keeper " + n + " : ", "You need to input name of stor keeper!");
+                        ops.addStoreKeeper(nameStoreKeeper, name);
+                    }
+                    break;
+                case 2:
+//                    ops.add(id, name, location, price, expiryDate, manuOfDate, category, storeKeeper, receiptDate);
+                    ops.add();
+                    break;
+                case 3:
+                    int id = val.getId("Input id you want to update:", "You need to input integer!");
+                    ops.updateProduct(id);
+                    break;
+                case 4:
+                    ops.search();
+                    break;
+                case 5:
+                    ops.sort();
+                    break;
+                case 6:
+                    ops.addMany();
+                    break;
+                case 7:
+                    ops.show();
+                    break;
+                case 8:
+                    ops.showNameStoreKeeper(nameStoreKeeper);
+                    break;
+            }
+        } while (true);
+    }
+
 }
