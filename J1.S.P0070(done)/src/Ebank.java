@@ -19,9 +19,9 @@ public class Ebank {
         return bundle;
     }
 
-    public void setBundle(ResourceBundle bundle) {
-        this.bundle = bundle;
-    }
+//    public void setBundle(ResourceBundle bundle) {
+//        this.bundle = bundle;
+//    }
 
     public void setLocale(Locale locale) {
         bundle = ResourceBundle.getBundle("language", locale); // đi vào file có dạng language_locale
@@ -33,7 +33,6 @@ public class Ebank {
             str = bundle.getString("accountErr");
         }
         return str;
-
     }
 
     public String checkPassword(String password) {
@@ -41,7 +40,6 @@ public class Ebank {
         if (password.length() < 8 || password.length() > 31) {
             str += bundle.getString("passwordErr");
             return str;
-
         }
         if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,31}$")) {
             str += bundle.getString("passwordErr");

@@ -35,7 +35,6 @@ public class Main {
                     locale = new Locale("en");
                     e.setLocale(locale);
                     view.login(e);
-
                     break;
                 case 3:
                     return;

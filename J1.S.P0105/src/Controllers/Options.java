@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
@@ -19,15 +20,15 @@ import java.util.Random;
  */
 public class Options {
 
-    int index;
     Validation val = new Validation();
+    Ultils ult = new Ultils();
     ArrayList<String> nameStoreKeeper = new ArrayList<>();
 
     private ArrayList<Product> products = new ArrayList<Product>();
 
     int number = 1;
 
-    public ArrayList addStoreKeeper(ArrayList<String> nameStoreKeeper, String name) {
+    public ArrayList addStoreKeeper(String name) {
         for (String n : nameStoreKeeper) {
             if (name.equalsIgnoreCase(n)) {
                 name = name + number;
@@ -40,27 +41,88 @@ public class Options {
     }
 
     public void add() throws ParseException {
-        products.add(product());
+        int id;
+        Double price;
+        String name, location, category, storeKeeper;
+        String expiryDate, manuOfDate, receiptDate;
+        int checkDate;
+        do {
+            id = val.getId("Input id: ", "You need to input integer!");
+            if (!ult.idIsExist(products, id)) {
+                System.out.println("This id is already exsit!");
+            }
+        } while (!ult.idIsExist(products, id));
+        name = val.getName("Input name: ", "You need to input correct name of product!");
+        price = val.getPrice("Input price: ", "Price not contains character");
+        location = val.getString("Input location: ");
+        expiryDate = val.getDate("Input Expiry Date: ", "You need to input like the format dd/mm/yyyy!");
+        do {
+            manuOfDate = val.getDate("Input Manufacture Date: ", "You need to input like the format dd/mm/yyyy!");
+            checkDate = val.compareDate(expiryDate, manuOfDate);
+        } while (checkDate >= 0);
+        category = val.getString("Input category: ");
+        storeKeeper = val.checkName(nameStoreKeeper);
+        receiptDate = val.getDate("Input Receipt Date: ", "You need to input like the format dd/mm/yyyy!");
+        products.add(new Product(id, name, location, price, expiryDate, manuOfDate, category, storeKeeper, receiptDate));
     }
 
-    public boolean updateProduct(int id) throws ParseException {
-        findId(id);
-        products.set(index, product());
-        return true;
+    public boolean updateProduct(int idUpdate) throws ParseException {
+        int id;
+        Double price;
+        String name, location, category, storeKeeper;
+        String expiryDate, manuOfDate, receiptDate;
+        int checkDate;
+        if (ult.findById(products, idUpdate) != -1) {
+            id = ult.findById(products, idUpdate);
+            name = val.getName("Input name: ", "You need to input correct name of product!");
+            price = val.getPrice("Input price: ", "Price not contains character");
+            location = val.getString("Input location: ");
+            expiryDate = val.getDate("Input Expiry Date: ", "You need to input like the format dd/mm/yyyy!");
+            do {
+                manuOfDate = val.getDate("Input Manufacture Date: ", "You need to input like the format dd/mm/yyyy!");
+                checkDate = val.compareDate(expiryDate, manuOfDate);
+            } while (checkDate >= 0);
+            category = val.getString("Input category: ");
+            storeKeeper = val.checkName(nameStoreKeeper);
+            receiptDate = val.getDate("Input Receipt Date: ", "You need to input like the format dd/mm/yyyy!");
+            products.set(ult.index, new Product(id, name, location, price, expiryDate, manuOfDate, category, storeKeeper, receiptDate));
+            return true;
+        }
+        return false;
     }
 
-    public void search() {
-
+    public ArrayList search(int choice, String s) {
+        ArrayList<Product> list;
+        if (choice == 1) {
+            list = ult.searchByName(products, s);
+        } else if (choice == 2) {
+            list = ult.searchByCategory(products, s);
+        } else if (choice == 3) {
+            list = ult.searchByStoreKeeper(products, s);
+        } else {
+            list = ult.searchByDate(products, s);
+        }
+        return list;
     }
 
-    public void sort() {
-
+    public ArrayList sort(int choice) {
+        if (choice == 1) {
+            Collections.sort(products, (Product p1, Product p2) -> {
+                return p1.getExpiryDate().compareTo(p2.getExpiryDate());
+            });
+        } else {
+            Collections.sort(products, (Product p1, Product p2) -> {
+                return p1.getManuOfDate().compareTo(p2.getManuOfDate());
+            });
+        }
+        return products;
     }
 
-    public void addMany() {
-        products.add(new Product(1, "Quan", "MC", 4.6, "3/3/2001", "3/3/2001", "Quan ao", "Lam", "3/3/2001"));
-        products.add(new Product(2, "Ao", "HN", 4.6, "3/3/2001", "3/3/2001", "Quan ao", "Quang", "3/3/2001"));
-        products.add(new Product(3, "Banh", "BG", 4.6, "3/3/2001", "3/3/2001", "thuc an", "Vinh", "3/3/2001"));
+    public Options() {
+        products.add(new Product(1, "Quan", "MC", 4.6, "2001/1/6", "2001/3/30", "Quan ao", "Lam", "2001/3/7"));
+        products.add(new Product(1, "Quan", "MC", 4.6, "2001/1/3", "2001/3/3", "Quan ao", "Lam", "2001/3/7"));
+        products.add(new Product(2, "Ao", "HN", 4.6, "2001/9/3", "2000/4/4", "Quan ao", "Quang", "2001/3/5"));
+        products.add(new Product(3, "Banh", "BG", 4.6, "2001/3/3", "2001/3/2", "thuc an", "Vinh", "2001/3/10"));
     }
 
     public void show() {
@@ -76,29 +138,7 @@ public class Options {
     }
 
     Product product() throws ParseException {
-        int id;
-        Double price;
-        String name, location, category, storeKeeper;
-        String expiryDate, manuOfDate, receiptDate;
-        int checkDate;
-        do {
-            id = val.getId("Input id: ", "You need to input integer!");
-            if (!val.idIsExist(products, id, index)) {
-                System.out.println("This id is already exsit!");
-            }
-        } while (!val.idIsExist(products, id, index));
-        name = val.getName("Input name: ", "You need to input correct name of product!");
-        price = val.getPrice("Input price: ", "Price not contains character");
-        location = val.getString("Input location: ");
-        expiryDate = val.getDate("Input Expiry Date: ", "You need to input like the format dd/mm/yyyy!");
-        do {
-            manuOfDate = val.getDate("Input Manufacture Date: ", "You need to input like the format dd/mm/yyyy!");
-            checkDate = val.compareDate(expiryDate, manuOfDate);
-        } while (checkDate >= 0);
-        category = val.getString("Input category: ");
-        storeKeeper = val.checkName(nameStoreKeeper);
-        receiptDate = val.getDate("Input Receipt Date: ", "You need to input like the format dd/mm/yyyy!");
-        return new Product(id, name, location, price, expiryDate, manuOfDate, category, storeKeeper, receiptDate);
+
     }
 
     public void showNameStoreKeeper(ArrayList<String> nameStoreKeeper) {
@@ -106,20 +146,4 @@ public class Options {
             System.out.println(n);
         }
     }
-    void printf(ArrayList<Product> product, int i) {
-        System.out.printf("%s |%-5s |%s |%s |%s |%s |%-10s |%-10s |%-15s\n", "ID", "Name", "Location", "Price", "Expiry date", "Date of manufacture", "Category", "Storekeeper", "ReceiptDate");
-        System.out.printf("%-2s |%-5s |%-8s |%-5s |%-11s |%-19s |%-10s |%-11s |%-1s\n",
-                product.get(i).getId(), product.get(i).getName(), product.get(i).getLocation(), product.get(i).getPrice(), product.get(i).getExpiryDate(), product.get(i).getManuOfDate(), product.get(i).getCategory(), product.get(i).getStoreKeeper(), product.get(i).getReceiptDate());
-    }
-
-    public int findId(int id){
-        for (int i = 0; i < products.size(); i++) {
-            if(products.get(i).getId() == id){
-                index = i;
-                return id;
-            }
-        }
-        return -1;
-    }
-
 }
