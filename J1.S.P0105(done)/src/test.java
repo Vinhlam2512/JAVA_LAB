@@ -17,9 +17,12 @@ import java.util.Scanner;
 public class test {
 
     public static void main(String[] args) throws ParseException {
-        name = 
+
+        // convert into Double
+
+        double d_num = 4;
+        System.out.println(Double.valueOf('f') % 1);
 
     }
 
-    
 }

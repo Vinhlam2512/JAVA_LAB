@@ -59,10 +59,11 @@ public class Validation {
         while (true) {
             System.out.print(inputMsg);
             name = sc.nextLine().trim().toUpperCase();
-            if (name.matches("^[A-Za-z]+([\\ A-Za-z]+)*")) {
+            if (name.contains("^[0,9]$")) {
+                System.out.println(errMsg);
+            } else {
                 return name;
             }
-            System.out.println(errMsg);
         }
     }
 
@@ -73,38 +74,35 @@ public class Validation {
         return string;
     }
 
-    public Double getPrice(String inputMsg, String errMsg) {
-        double price;
-        do {
-            System.out.print(inputMsg);
-            while (!sc.hasNextDouble()) {
-                System.out.println(errMsg);
-                System.out.print(inputMsg);
-                sc.nextLine();
+    public String getPrice(String inputMsg, String errMsg) {
+        String price;
+        String regex = "^[0-9]+[\\.][0-9]+$";
+        while (true) {
+            System.out.println(inputMsg);
+            price = sc.nextLine();
+            if (price.matches(regex) || price.equals("")) {
+                return price;
             }
-            price = Double.parseDouble(sc.nextLine().trim());
-        } while (price < 1);
-        return price;
+            System.out.println(errMsg);
+        }
     }
 
     public String getDate(String inputMsg, String errMsg) {
         String date;
         String[] splited;
-        do {
-            System.out.print(inputMsg);
-            date = sc.nextLine().trim();
-        } while (isDateValid(date) == false);
+        System.out.print(inputMsg);
+        date = sc.nextLine().trim();
         return date;
     }
 
     SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd");
 
-    public int compareDate(String expiryDate, String manuOfDate) throws ParseException { // compare 2 date
+    public int compareDate(String d1, String d2, String msg) throws ParseException { // compare 2 date
         Date date1, date2;
-        date1 = sdformat.parse(expiryDate);
-        date2 = sdformat.parse(manuOfDate);
-        if (date1.after(date2)) {
-            System.out.println("Manufacture Date need after Expiry Date!");
+        date1 = sdformat.parse(d1);
+        date2 = sdformat.parse(d2);
+        if (date1.after(date2) || date1.equals(date2)) {
+            System.out.println(msg);
             return 1;
         } else {
             return -1;
@@ -135,6 +133,9 @@ public class Validation {
                 for (String str : nameStoreKeeper) {
                     if (str.equalsIgnoreCase(storeKeeper)) {
                         return storeKeeper;
+                    }
+                    if(storeKeeper.isEmpty()){
+                        return "";
                     }
                 }
             } while (true);

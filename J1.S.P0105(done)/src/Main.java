@@ -10,6 +10,5 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         View v = new View();
         v.view();
-
     }
 }

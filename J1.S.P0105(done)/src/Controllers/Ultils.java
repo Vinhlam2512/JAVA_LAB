@@ -14,23 +14,26 @@ import Models.Product;
  */
 public class Ultils {
 
-    int index;
+    public int index;
+    int idCheck;
+    public ArrayList findById(ArrayList<Product> products, int id) {
+        ArrayList<Product> listUpdate = new ArrayList<>();
 
-    public int findById(ArrayList<Product> products, int id) {
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getId() == id) {
                 index = i;
-                return id;
+                idCheck = id;
+                listUpdate.add(products.get(i));
             }
         }
-        return -1;
+        return listUpdate;
     }
 
     public boolean idIsExist(ArrayList<Product> products, int id) {
-        if (findById(products, id) != -1) {
-            return false;
+        if (findById(products, id).isEmpty()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public ArrayList searchByName(ArrayList<Product> products, String s) {

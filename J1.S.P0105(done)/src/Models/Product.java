@@ -16,7 +16,7 @@ public class Product {
     private int id;
     private String name;
     private String location;
-    private Double price;
+    private String price;
     private String expiryDate;
     private String manuOfDate;
     private String category;
@@ -26,7 +26,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String location, Double price, String expiryDate, String manuOfDate, String category, String storeKeeper, String receiptDate) {
+    public Product(int id, String name, String location, String price, String expiryDate, String manuOfDate, String category, String storeKeeper, String receiptDate) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -62,11 +62,11 @@ public class Product {
         this.location = location;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

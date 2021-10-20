@@ -6,6 +6,7 @@
 package Views;
 
 import Controllers.Options;
+import Controllers.Ultils;
 import Controllers.Validation;
 import Models.Product;
 import java.text.ParseException;
@@ -21,6 +22,7 @@ public class View {
 
     Scanner sc = new Scanner(System.in);
 
+    // Main menu
     public void menu() {
         System.out.println("");
         System.out.println("-------------------------------------------------------------------------------------------");
@@ -33,6 +35,7 @@ public class View {
         System.out.println("7.      Exit");
     }
 
+    // Menu Search
     public void menuSearch() {
         System.out.println("Input field you want to search: ");
         System.out.println("1. Name");
@@ -41,12 +44,14 @@ public class View {
         System.out.println("4. ReceiptDate");
     }
 
+    // Menu Sort
     public void menuSort() {
         System.out.println("Input field you want to sort: ");
         System.out.println("1. Expiry date");
         System.out.println("2. Date of manufacture");
     }
 
+    // Printf List
     void printf(ArrayList<Product> product, int i) {
         System.out.printf("%-2s |%-5s |%-8s |%-5s |%-11s |%-19s |%-10s |%-11s |%-1s\n",
                 product.get(i).getId(), product.get(i).getName(), product.get(i).getLocation(), product.get(i).getPrice(), product.get(i).getExpiryDate(), product.get(i).getManuOfDate(), product.get(i).getCategory(), product.get(i).getStoreKeeper(), product.get(i).getReceiptDate());
@@ -56,6 +61,7 @@ public class View {
         Scanner sc = new Scanner(System.in);
         Options ops = new Options();
         Validation val = new Validation();
+        Ultils ult = new Ultils();
         int choice, size, n;
         String field;
         do {
@@ -63,6 +69,7 @@ public class View {
             choice = val.inputChoice(1, 8);
             switch (choice) {
                 case 1:
+                    // add name of storeKeeper
                     String name;
                     size = val.getId("Input number of storeKeeper you want to add: ", "You need to input integer!");
                     for (int i = 0; i < size; i++) {
@@ -72,10 +79,18 @@ public class View {
                     }
                     break;
                 case 2:
-                    ops.add();
+                    // check can add
+                    if (ops.add() == false) {
+                        System.out.println("--------------------------------You need input Name of store keeper first!--------------------------------");
+                    }
                     break;
                 case 3:
+                    // input id
+                    ArrayList<Product> listUpdate;
                     int id = val.getId("Input id you want to update:", "You need to input integer!");
+                    listUpdate = ops.getListUpdate(id);
+                    System.out.printf("%s |%-5s |%s |%s |%s |%s |%-10s |%-10s |%-15s\n", "ID", "Name", "Location", "Price", "Expiry date", "Date of manufacture", "Category", "Storekeeper", "ReceiptDate");
+                    printf(listUpdate, ult.index);
                     if (ops.updateProduct(id)) {
                         System.out.println("--------------------------------Update Success--------------------------------");
                     } else {
@@ -172,7 +187,7 @@ public class View {
                     ops.show();
                     break;
                 case 7:
-                    break;
+                    return;
                 case 8:
 //                    ops.showNameStoreKeeper(nameStoreKeeper);
                     break;
